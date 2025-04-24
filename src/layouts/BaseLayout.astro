@@ -1,0 +1,40 @@
+---
+  const { lang, t } = Astro.props;
+
+  const languages = [
+    { code: 'en', name: t.languageOptions.es },
+    { code: 'es', name: t.languageOptions.en },    
+  ];
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+    <title>{t.nav.home}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">{t.nav.home}</a></li>
+          <li><a href="/about">{t.nav.about}</a></li>
+          <li><a href="/contact">{t.nav.contact}</a></li>
+        </ul>
+      </nav>
+      <div class="language-selector">
+        {languages.map(lang => (
+          <a href={`/${lang.code}`} class={lang.code === Astro.props.lang ? 'active' : ''}>
+            {lang.name}
+          </a>
+        ))}
+      </div>
+    </header>
+  
+      <main>{Astro.children}</main>
+  
+      <footer>
+        <p>{t.footer.text}</p>
+      </footer>    
+</html>
