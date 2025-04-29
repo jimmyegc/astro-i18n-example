@@ -1,4 +1,6 @@
 ---
+import { getTranslations } from "../utils/getTranslations";
+
   const { lang, t } = Astro.props;
 
   const languages = [
@@ -6,8 +8,9 @@
     { code: 'en', name: t.languageOptions.en },    
   ];
 
-  console.log("lang", lang)
-  
+  const response = await getTranslations(lang);
+  console.log("lang", lang);
+  console.log("response", response);
 ---
 
 <!DOCTYPE html>
