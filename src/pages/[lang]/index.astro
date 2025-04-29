@@ -3,6 +3,7 @@ import es from '../../i18n/es'
 import en from '../../i18n/en'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import type { Language } from '../../types/language.type'
+import { fetchLangFromSupabase } from '../../utils/fetchInfoFromSupabase'
 
 export function getStaticPaths() {
   return [
@@ -14,11 +15,24 @@ export function getStaticPaths() {
 export const defaultRedirect = "/es"
 
 const lang = Astro.params.lang as Language;
+console.log(lang);
+
 const translations = { es, en}
-const t = translations[lang]
+let t = translations[lang]
+
+const response = await fetchLangFromSupabase(lang)
+console.log("response", response);
+t = {
+  ...t,
+  ...response,
+}
+
+
 ---
 
 <BaseLayout lang={lang} t={t}>
-  <h1>{t && JSON.stringify(t)}</h1>  
+  <pre>
+  {t && JSON.stringify(t, null , 2)}
+  </pre>
 </BaseLayout> 
 

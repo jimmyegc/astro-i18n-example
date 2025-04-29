@@ -2,9 +2,12 @@
   const { lang, t } = Astro.props;
 
   const languages = [
-    { code: 'en', name: t.languageOptions.es },
-    { code: 'es', name: t.languageOptions.en },    
+    { code: 'es', name: t.languageOptions.es },
+    { code: 'en', name: t.languageOptions.en },    
   ];
+
+  console.log("lang", lang)
+  
 ---
 
 <!DOCTYPE html>
@@ -32,9 +35,11 @@
       </div>
     </header>
   
-      <main>{Astro.children}</main>
+      <main>
+        <slot />
+      </main>
   
-      <footer>
+<!--       <footer>
         <p>{t.footer.text}</p>
-      </footer>    
+      </footer>   -->  
 </html>
